@@ -1,0 +1,70 @@
+{% extends 'Layout.html.twig' %}
+
+{#      the view title      #}
+{% block title controller_name %}
+
+{#      The view style sheet    #}
+{% block stylesheets %}
+{% endblock %}
+
+
+{#      the title h1 of the view   #}
+{% block h1 "Hello "~ controller_name %}
+
+{% block body %}
+
+    <div id="content" class="bg-white container-fluid">
+        Page {{ route }}
+
+        <form action="" method="post">
+            <div class="container row">
+            <div class="form-group col-lg-6">
+                <label>User name : </label>
+                <input type="text" class="form-control" required
+                       name="userName" placeholder="userName" value="{{ user.userName }}"
+                >
+            </div>
+            <div class="form-group col-lg-6">
+                <label>First name : </label>
+                <input type="text" class="form-control" required
+                       name="firstName" placeholder="firstName" value="{{ user.firstName }}"
+                >
+            </div>
+            <div class="form-group col-lg-6">
+                <label>Last name : </label>
+                <input type="text" class="form-control" required
+                       name="lastName" placeholder="lastName" value="{{ user.lastName }}"
+                >
+            </div>
+            <div class="form-group col-lg-6">
+                <label>Email : </label>
+                <input type="email" class="form-control" required
+                       name="email" placeholder="email" value="{{ user.email }}"
+                >
+            </div>
+            <div class="form-group col-lg-6">
+                <label>birthday : </label>
+                <input type="date" class="form-control" required
+                       name="birthday" placeholder="birthday" {% if user.birthday %}value="{{ user.birthday |date('Y-m-d')}}"{% endif %}
+                >
+            </div>
+            <div class="form-group col-lg-6">
+                <label>Password : </label>
+                <input type="password" class="form-control" required
+                       name="password" placeholder="password" value="{{ user.password }}"
+                >
+            </div>
+
+            <div class="form-group">
+                <button type="submit" class="btn btn-success">Login</button>
+            </div>
+            </div>
+        </form>
+    </div>
+{% endblock %}
+
+
+{#      The view JavaScript    #}
+{% block javascripts %}{% endblock %}
+
+

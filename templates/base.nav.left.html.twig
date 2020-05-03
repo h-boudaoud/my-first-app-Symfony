@@ -1,0 +1,30 @@
+{% extends 'Layout.html.twig' %}
+
+{#      the view title      #}
+{% block title controller_name %}
+
+{#      The view style sheet    #}
+{% block stylesheets %}
+
+{% endblock %}
+
+
+{#      the title h1 of the view   #}
+{% block h1 "Hello "~ controller_name %}
+
+{% block body %}
+    <div class="row">
+        <div id="navigationLeft" class="col-12 col-lg-2" style="color:white;">
+            <div class="sticky-top">
+                {% block navigationLeft %} nav left {% endblock %}
+            </div>
+        </div>
+        <div id="content" class="col-12 col-lg-9 bg-white container-fluid" style="overflow: auto">
+            {% block content %} Page Articles {% endblock %}
+        </div>
+    </div>
+{% endblock %}
+
+
+{#      The view JavaScript    #}
+{% block javascripts %}{% endblock %}

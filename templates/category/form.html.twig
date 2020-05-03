@@ -1,0 +1,59 @@
+{% extends 'base.nav.left.html.twig' %}
+
+{#      the view title      #}
+{% block title controller_name %}
+
+{#      The view style sheet    #}
+{% block stylesheets %}
+
+{% endblock %}
+
+
+{#      the title h1 of the view   #}
+{% block h1 "Hello "~ controller_name %}
+
+
+{#      Block body of the view   #}
+{% block navigationLeft %}
+    <nav class="sticky-top navbar navbar-dark">
+        {% if categories| length > 0 %}
+            <div class=" dropdown">
+                <a class="nav-link dropdown-toggle bg-transparent" href="#" id="navbarDropdown" role="button"
+                   data-toggle="dropdown" aria-haspopup="false" aria-expanded="true">
+                    Category
+                </a>
+                <div class="dropdown-menu bg-transparent" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" href={{ path('articles') }}>All categories</a>
+                    {% for category in categories %}
+                        <a class="dropdown-item"
+                           href={{ path('articles_by_category' ,{'id' : category.id}) }}>{{ category.name }}</a>
+                    {% endfor %}
+                </div>
+            </div>
+        {% endif %}
+    </nav>
+{% endblock %}
+
+{% block content %}
+    Page Category : {{ title }}
+    <br/>{% if category %}{{ category.name }} {% endif %}
+    <hr/>
+        <form action="" method="post">
+            <div class="container px-5">
+                <div class="form-group">
+                    <label>category : </label>
+                    <input type="text" class="form-control" required
+                           name="name" placeholder="category" value="{{ category.name }}"
+                    >
+                </div>
+
+                <div class="form-group">
+                    <button type="submit" class="btn btn-success">Login</button>
+                </div>
+            </div>
+        </form>
+{% endblock %}
+{#      End block body of the view   #}
+
+{#      The view JavaScript    #}
+{% block javascripts %}{% endblock %}

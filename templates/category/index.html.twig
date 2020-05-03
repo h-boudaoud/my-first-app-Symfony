@@ -1,0 +1,92 @@
+{% extends 'base.nav.left.html.twig' %}
+
+{#      the view title      #}
+{% block title controller_name %}
+{% block styleFiles %}
+    <link rel="stylesheet"
+          href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css">
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.css">
+
+
+{% endblock %}
+
+{#      The view style sheet    #}
+{% block stylesheets %}
+
+{% endblock %}
+
+
+{#      the title h1 of the view   #}
+{% block h1 "Hello "~ controller_name %}
+
+
+{#      Block body of the view   #}
+{% block navigationLeft %}
+    <nav class="sticky-top navbar navbar-dark">
+        <div>
+            <form action="{{ path('category_new') }}" method="post">
+                <input type="text" name="name" required/>
+                <button type="submit" class="btn btn-success">add Category</button>
+            </form>
+        </div>
+        {% if categories| length > 0 %}
+            <div class="dropdown">
+                <a class="nav-link dropdown-toggle bg-transparent" href="#" id="navbarDropdown" role="button"
+                   data-toggle="dropdown" aria-haspopup="false" aria-expanded="true">
+                    Category
+                </a>
+                <div class="dropdown-menu bg-transparent" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" href={{ path('articles') }}>All categories</a>
+                    {% for category in categories %}
+                        <a class="dropdown-item"
+                           href="{{ path('articles_by_category' ,{'id' : category.id}) }}">{{ category.name }}</a>
+                    {% endfor %}
+                </div>
+            </div>
+        {% endif %}
+    </nav>
+{% endblock %}
+
+{% block content %}
+    <h2>Categories list</h2>
+    <hr/>
+
+    <div class="table-responsive-lg">
+        {#        https://datatables.net/examples/styling/bootstrap4#}
+
+        <table class="table table-striped table-bordered" id="categiriesTable">
+            <thead>
+            <tr>
+                <th scope="col-6">Name</th>
+                <th scope="col">nb articles</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for category in categories %}
+
+                <tr>
+                    <th scope="row">
+                        <a href="{{ path('articles_by_category' ,{'id' : category.id}) }}"
+                           class="btn btn-infos"> {{ category.name }} </a></th>
+                    <td>{{ category.articles | length }}</td>
+                </tr>
+
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+{% endblock %}
+{#      End block body of the view   #}
+
+{#      The view JavaScript    #}
+
+{% block scriptFiles %}
+    <script src=https://code.jquery.com/jquery-3.3.1.js></script>
+    <script src=https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js></script>
+    <script src=https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js></script>
+{% endblock %}
+{% block javascripts %}
+    $("#categiriesTable").DataTable();
+{% endblock %}

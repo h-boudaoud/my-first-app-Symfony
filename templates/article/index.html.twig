@@ -1,0 +1,77 @@
+{% extends 'base.nav.left.html.twig' %}
+
+{#      the view title      #}
+{% block title controller_name %}
+
+{#      The view style sheet    #}
+{% block stylesheets %}
+
+{% endblock %}
+
+
+{#      the title h1 of the view   #}
+{% block h1 "Hello "~ controller_name %}
+
+
+{#      Block body of the view   #}
+{% block navigationLeft %}
+    <nav class="sticky-top navbar navbar-dark">
+        {% if categories| length > 0 %}
+            <div class=" dropdown">
+                <a class="nav-link dropdown-toggle bg-transparent" href="#" id="navbarDropdown" role="button"
+                   data-toggle="dropdown" aria-haspopup="false" aria-expanded="true">
+                    Category
+                </a>
+                <div class="dropdown-menu bg-transparent" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" href={{ path('articles') }}>All categories</a>
+                    {% for category in categories %}
+                        <a class="dropdown-item"
+                           href={{ path('articles_by_category' ,{'id' : category.id}) }}>{{ category.name }}</a>
+                    {% endfor %}
+                </div>
+            </div>
+        {% endif %}
+        <ul>
+            <li>
+                <a href="" class="btn">
+                    <i class="fa fa-add"></i> New
+                </a>
+            </li>
+            <li>
+                <a href="" class="btn">
+                    <i class="fa fa-edit"></i> Edit
+                </a>
+            </li>
+            <li>
+                <a href="" class="btn">
+                    <i class="fa fa-delete"></i> Delete
+                </a>
+            </li>
+            <li>
+                <a href="" class="btn">
+                    <i class="fa fa-comment"></i> New comment
+                </a>
+            </li>
+        </ul>
+    </nav>
+{% endblock %}
+
+{% block content %}
+    Page Category  {{ id }}
+    <br/>{% if category.name %}{{ category.name }} {% endif %}
+    <hr/>
+        <p>
+            {{ article.id }} : {{ article.name }}
+        </p>
+        <p>
+            {{ article.createdAt |date("m/d/Y") }}
+        </p>
+        <p>
+            {{ article.description |replace({'\n':'</p><p>'})| nl2br}}
+        </p>
+
+{% endblock %}
+{#      End block body of the view   #}
+
+{#      The view JavaScript    #}
+{% block javascripts %}{% endblock %}

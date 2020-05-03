@@ -1,0 +1,24 @@
+{% extends 'Layout.html.twig' %}
+
+{#      the view title      #}
+{% block title controller_name %}
+
+{#      The view style sheet    #}
+{% block stylesheets %}
+{% endblock %}
+
+
+{#      the title h1 of the view   #}
+{% block h1 "Hello "~ controller_name %}
+
+{% block body %}
+
+<div id="content" class="bg-white container-fluid"  style="overflow: auto" >
+    Page index
+
+</div>
+{% endblock %}
+
+
+{#      The view JavaScript    #}
+{% block javascripts %}{% endblock %}
